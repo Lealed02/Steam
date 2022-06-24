@@ -180,6 +180,7 @@ public class Steam {
 			this.setBackground(Modes.Clmenu.toColor());
 			iHome =  new ImageIcon(new ImageIcon("home.png").getImage().getScaledInstance(210, 32, Image.SCALE_DEFAULT));
 			setupHome();
+			 setupSearch();
 			this.add(home, BorderLayout.NORTH);
 			this.add(search, BorderLayout.CENTER);
 		}
@@ -199,7 +200,7 @@ public class Steam {
 		}
 		
 		public void setupSearch() {
-			
+			search.setBackground(Modes.Cbot.toColor());
 		}
 	}
 	
