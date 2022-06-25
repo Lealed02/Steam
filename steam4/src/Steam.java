@@ -12,6 +12,7 @@ public class Steam {
 	//Images
 	private ImageIcon ALeft = new ImageIcon("left.png");
 	private ImageIcon ARight = new ImageIcon("right.png");
+	private ImageIcon iSearchArrow = new ImageIcon("searchArrow.png");
 	private ImageIcon iHome =  new ImageIcon(new ImageIcon("home.png").getImage().getScaledInstance(210, 32, Image.SCALE_DEFAULT));
 	private ImageIcon iSort = new ImageIcon("sort.png");
 	private ImageIcon iReady = new ImageIcon("ready.png");
@@ -202,8 +203,15 @@ public class Steam {
 		
 		public void setupSearch() {
 			search.setBackground(Modes.Cbot.toColor());
+			FlowLayout f1 = new FlowLayout(FlowLayout.LEADING);
+			f1.setVgap(7);
+			search.setLayout(f1);
 			
-			
+		//	gamesLabel.setOpaque(true);
+			//gamesLabel.setText("<html><font color='white'>GAMES</font></html>");
+			//gamesLabel.setHorizontalTextPosition(JLabel.LEFT);
+			gamesLabel.setPreferredSize(new Dimension(150, 30));
+			gamesLabel.setUI(new customLabelUI());
 			search.add(gamesLabel);
 		}
 	}
@@ -231,9 +239,10 @@ public class Steam {
 	    Chmenu (new Color(28,40,55,255)),
 	     Clmenu(new Color(30,32,38,255)),
 	    Ctop (new Color(1,1,1)),
-	    Cbot (new Color(36,40,47,255)),
-		Ccenter (new Color(56,60,75,255));
-
+	    Cbot (new Color(42,47,55)),
+		Ccenter (new Color(56,60,75,255)),
+		Cgameslabel (new Color(46,38,44));
+		
 	    private final Color name;       
 
 	    private Modes(Color color) {
