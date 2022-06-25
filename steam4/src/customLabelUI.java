@@ -32,7 +32,7 @@ public class customLabelUI extends BasicLabelUI {
 
 	    private void paintBackground (Graphics g, JComponent c, int yOffset) {
 	    	ImageIcon iSearchArrow = new ImageIcon("searchArrow.png");
-	   // iSearchArrow = new ImageIcon("home.png");
+	  // iSearchArrow = new ImageIcon("home.png");
 	    	Dimension size = c.getSize();
 	        Graphics2D g2 = (Graphics2D) g;
 	        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -56,7 +56,7 @@ public class customLabelUI extends BasicLabelUI {
 	        g.setColor(new Color(165,163,167));
 	        
 	        g.drawString("Games", 0,22);
-	        g2.drawImage(iSearchArrow.getImage(),5,0, null);
+	        g2.drawImage(iSearchArrow.getImage(),100,0, null);
 	     
 	         for (int y = 0; y < 100; y++) {
 	        	
