@@ -28,6 +28,7 @@ public class Steam {
 	//Side panel
 	
 		private JLabel homeLabel = new JLabel();
+		private JLabel gamesLabel = new JLabel();
 		private JScrollPane side; //Will turn sideBar into a scroll pane once initialised
 		private JPanel home = new JPanel();
 		private JPanel search = new JPanel();
@@ -201,6 +202,9 @@ public class Steam {
 		
 		public void setupSearch() {
 			search.setBackground(Modes.Cbot.toColor());
+			
+			
+			search.add(gamesLabel);
 		}
 	}
 	
