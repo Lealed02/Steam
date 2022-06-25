@@ -18,7 +18,7 @@ public class Steam {
 	private ImageIcon iReady = new ImageIcon("ready.png");
 	private ImageIcon iCollections = new ImageIcon("collections.png");
 	
-	//
+	//test
 	
 	private TopMenu tmenu = new TopMenu();
 	private BotMenu bMenu = new BotMenu();
