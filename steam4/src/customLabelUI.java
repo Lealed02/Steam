@@ -59,7 +59,7 @@ public class customLabelUI extends BasicLabelUI {
 	        iSearchArrow = new ImageIcon(new ImageIcon("searchArrow.png").getImage().getScaledInstance(15, 10, Image.SCALE_DEFAULT));
 	        g.drawString("Games", 5,22);
 	        g2.drawImage(iSearchArrow.getImage(),185,10, null);
-	     
+	        
 	         for (int y = 0; y < 100; y++) {
 	        	
 	         }

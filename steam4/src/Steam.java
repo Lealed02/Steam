@@ -7,6 +7,7 @@ import javax.swing.border.*;
 
 
 
+
 public class Steam {
 	
 	//Images
@@ -167,7 +168,8 @@ public class Steam {
 			this.setLayout(new BorderLayout());
 			this.setBackground(Color.red);
 			this.setMinimumSize(new Dimension(300,300));
-		
+			this.setMaximumSize(new Dimension(257,200));
+			
 			this.add(top, BorderLayout.NORTH);
 			this.add(bot, BorderLayout.CENTER);
 			
@@ -205,6 +207,9 @@ public class Steam {
 		}
 		
 		public void setupSearch() {
+			
+			
+			
 			search.setBackground(Modes.Cbot.toColor());
 			FlowLayout f1 = new FlowLayout(FlowLayout.LEADING);
 			f1.setVgap(7);
@@ -226,6 +231,19 @@ public class Steam {
 			JLabel readyLabel = new JLabel();
 			readyLabel.setIcon(iReady);
 			search.add(readyLabel);
+			
+			f1.setVgap(3);
+			//NOW DOING SEARCH BAR
+			JLabel searchBar = new JLabel();
+			searchBar.setBorder(BorderFactory.createEmptyBorder());
+			searchBar.setUI(new SearchBarUI());
+			searchBar.setOpaque(true);
+			searchBar.setPreferredSize(new Dimension(210,25));
+			search.add(searchBar);
+			
+			
+			int y = (int) (gamesLabel.getPreferredSize().getHeight() + searchBar.getPreferredSize().getHeight()+20);
+			search.setPreferredSize(new Dimension(257, y));
 		}
 	}
 	
