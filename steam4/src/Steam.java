@@ -61,6 +61,8 @@ public class Steam {
             	
             	frame.pack();
             	frame.setVisible(true);
+            	
+            	System.out.println(sideBar.getWidth());
             }
         });
 	}
@@ -91,6 +93,7 @@ public class Steam {
 			this.add(bMenu, BorderLayout.NORTH);
 			this.add(center, BorderLayout.CENTER);
 			this.add(sideBar, BorderLayout.WEST);
+			
 			
 			
 		}
@@ -210,9 +213,19 @@ public class Steam {
 		//	gamesLabel.setOpaque(true);
 			//gamesLabel.setText("<html><font color='white'>GAMES</font></html>");
 			//gamesLabel.setHorizontalTextPosition(JLabel.LEFT);
-			gamesLabel.setPreferredSize(new Dimension(150, 30));
+			gamesLabel.setPreferredSize(new Dimension(208, 30));
 			gamesLabel.setUI(new customLabelUI());
 			search.add(gamesLabel);
+			
+			ImageIcon iSort = new ImageIcon("sort.png");
+			JLabel sortLabel = new JLabel();
+			sortLabel.setIcon(iSort);
+			search.add(sortLabel);
+			
+			ImageIcon iReady = new ImageIcon("ready.png");
+			JLabel readyLabel = new JLabel();
+			readyLabel.setIcon(iReady);
+			search.add(readyLabel);
 		}
 	}
 	

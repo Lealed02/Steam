@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.RenderingHints;
 
@@ -54,9 +55,10 @@ public class customLabelUI extends BasicLabelUI {
 	        g.setFont(new Font("FF Din OT Bold", Font.PLAIN, 20));
 	        g.setColor(Color.white);
 	        g.setColor(new Color(165,163,167));
-	        
-	        g.drawString("Games", 0,22);
-	        g2.drawImage(iSearchArrow.getImage(),100,0, null);
+	        	        
+	        iSearchArrow = new ImageIcon(new ImageIcon("searchArrow.png").getImage().getScaledInstance(15, 10, Image.SCALE_DEFAULT));
+	        g.drawString("Games", 5,22);
+	        g2.drawImage(iSearchArrow.getImage(),185,10, null);
 	     
 	         for (int y = 0; y < 100; y++) {
 	        	
