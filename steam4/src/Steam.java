@@ -320,44 +320,50 @@ public class Steam {
 			StringBuilder read= new StringBuilder();
 			ArrayList<GameDetails> list = new ArrayList<GameDetails>();
 			int type = 0;
-			
+	
 			while ((c = bRead.read()) != -1) {
 			
 				
-				System.out.println((char) c);
-				read.append((char) c);
+			//	System.out.println((char) c);
+			//	read.append((char) c);
 				char d = (char) c;
+			//	System.out.println(read.toString());
 				
+			
 				char a = ",".toCharArray()[0];
 				
 				
 				if (d == a) {
-					switch (type) {
+			       switch (type) {
 					case 0:
 						type = 1;
 						
-						if (read.equals("true")) {
+						if (read.toString().equals("true")) {
 							current.setFriend(true);
 							
 						} else {
 							current.setFriend(false);
 						}
 						read = new StringBuilder();
+					
 						
 					case 1:
-						current.setIcon(read.toString());
+						//current.setIcon(read.toString());
 						type = 2;
 						read = new StringBuilder();
+					
 					case 2:
 						current.setName(read.toString());
+						//current.setName(b);
 						read = new StringBuilder();
 						type=0;
 						list.add(current);
 						current = new GameDetails();
+						
 					}
 				} else {
-				//	read.append((char) c);
-					read.t
+					read.append((char) c);
+					
 					
 				}
 				
