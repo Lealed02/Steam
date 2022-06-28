@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -23,6 +27,8 @@ public class Steam {
 	
 	private TopMenu tmenu = new TopMenu();
 	private BotMenu bMenu = new BotMenu();
+	private ArrayList<GameDetails> Lgames = new ArrayList<GameDetails>();
+	
 	
 	//Center panel
 	private FCenter center = new FCenter();
@@ -31,7 +37,7 @@ public class Steam {
 	
 		private JLabel homeLabel = new JLabel();
 		private JLabel gamesLabel = new JLabel();
-		private JScrollPane side; //Will turn sideBar into a scroll pane once initialised
+		 //Will turn sideBar into a scroll pane once initialised
 		private JPanel home = new JPanel();
 		private JPanel search = new JPanel();
 		private STop top = new STop(); //The top of the side bar
@@ -39,7 +45,7 @@ public class Steam {
 		
 		
 	private SideBar sideBar = new SideBar();	
-		
+	private JScrollPane side;
 	private GlassPane glass = new GlassPane();
 	
 	private final MainFrame mainFrame = new MainFrame();
@@ -48,6 +54,8 @@ public class Steam {
 		new Steam();
 		
 	}
+	
+	
 	
 	public Steam() {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,6 +86,7 @@ public class Steam {
 		sideBar.setBorder(BorderFactory.createEmptyBorder());
 		//side.setBorder(BorderFactory.createEmptyBorder());
 		center.setBorder(BorderFactory.createEmptyBorder());
+		side.setBorder(BorderFactory.createEmptyBorder());
 	}
 	
 	
@@ -171,9 +180,16 @@ public class Steam {
 			this.setMaximumSize(new Dimension(257,200));
 			
 			this.add(top, BorderLayout.NORTH);
-			this.add(bot, BorderLayout.CENTER);
+			setupScroll();
+			
+			this.add(side, BorderLayout.CENTER);
 			
 		//	this.setPSize(new Dimension(300,300));
+		}
+		
+		public void setupScroll() {
+			side = new JScrollPane(bot);
+			
 		}
 		
 	
@@ -270,13 +286,34 @@ public class Steam {
 	public class SBot extends JPanel {
 		public SBot() {
 			this.setBackground(Modes.Cbot.toColor());
+
+			
 		}
+		
+		
 	}
 	
 	public class GlassPane extends JPanel {
 		public GlassPane() {
 			this.setOpaque(false);
 			this.setLayout(null);
+			
+		}
+	}
+	
+	public class ReadDetails {
+		public void read() throws IOException {
+		
+			BufferedReader bRead = new BufferedReader(new FileReader("GamesList.txt"));
+			int i;
+			char chars;
+			String strCurrentLine;
+			
+			
+			while ((strCurrentLine = bRead.readLine()) != null) {
+				System.out.println(strCurrentLine);
+			}
+		
 			
 		}
 	}
