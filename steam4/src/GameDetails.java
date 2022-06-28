@@ -4,6 +4,7 @@ public class GameDetails {
 	private boolean friend = false;
 	private ImageIcon icon = new ImageIcon();
 	private String name;
+	
 	public boolean isFriend() {
 		return friend;
 	}
@@ -13,9 +14,10 @@ public class GameDetails {
 	public ImageIcon getIcon() {
 		return icon;
 	}
-	public void setIcon(ImageIcon icon) {
-		this.icon = icon;
+	public void setIcon(String icon) {
+		this.icon = new ImageIcon(icon);
 	}
+	
 	public String getName() {
 		return name;
 	}

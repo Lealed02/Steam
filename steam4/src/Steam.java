@@ -61,6 +61,14 @@ public class Steam {
 		EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+            	
+            	try {
+            		Lgames = new ReadDetails().read();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	
             	JFrame frame = new JFrame();
             	setBorders();
             	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -302,19 +310,66 @@ public class Steam {
 	}
 	
 	public class ReadDetails {
-		public void read() throws IOException {
+		public ArrayList<GameDetails> read() throws IOException {
 		
 			BufferedReader bRead = new BufferedReader(new FileReader("GamesList.txt"));
 			int i;
-			char chars;
-			String strCurrentLine;
+		
+			GameDetails current = new GameDetails();
+			int c;
+			StringBuilder read= new StringBuilder();
+			ArrayList<GameDetails> list = new ArrayList<GameDetails>();
+			int type = 0;
 			
+			while ((c = bRead.read()) != -1) {
 			
-			while ((strCurrentLine = bRead.readLine()) != null) {
-				System.out.println(strCurrentLine);
+				
+				System.out.println((char) c);
+				read.append((char) c);
+				char d = (char) c;
+				
+				char a = ",".toCharArray()[0];
+				
+				
+				if (d == a) {
+					switch (type) {
+					case 0:
+						type = 1;
+						
+						if (read.equals("true")) {
+							current.setFriend(true);
+							
+						} else {
+							current.setFriend(false);
+						}
+						read = new StringBuilder();
+						
+					case 1:
+						current.setIcon(read.toString());
+						type = 2;
+						read = new StringBuilder();
+					case 2:
+						current.setName(read.toString());
+						read = new StringBuilder();
+						type=0;
+						list.add(current);
+						current = new GameDetails();
+					}
+				} else {
+				//	read.append((char) c);
+					
+					
+				}
+				
 			}
+			readAll(list);
+			return list;
 		
 			
+		}
+		
+		public void readAll(ArrayList<GameDetails> list) {
+			System.out.println(list.get(0).getName());
 		}
 	}
 	
