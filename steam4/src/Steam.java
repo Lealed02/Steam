@@ -212,14 +212,20 @@ public class Steam {
 			
 			search.setBackground(Modes.Cbot.toColor());
 			FlowLayout f1 = new FlowLayout(FlowLayout.LEADING);
-			f1.setVgap(7);
+		
+			f1.setHgap(0);
+			
 			search.setLayout(f1);
 			
 		//	gamesLabel.setOpaque(true);
 			//gamesLabel.setText("<html><font color='white'>GAMES</font></html>");
 			//gamesLabel.setHorizontalTextPosition(JLabel.LEFT);
 			gamesLabel.setPreferredSize(new Dimension(208, 30));
+			gamesLabel.setBorder(new EmptyBorder(0,20,0,0));
+	
 			gamesLabel.setUI(new customLabelUI());
+			
+			search.add(Box.createRigidArea(new Dimension(5,0)));
 			search.add(gamesLabel);
 			
 			ImageIcon iSort = new ImageIcon("sort.png");
@@ -239,11 +245,25 @@ public class Steam {
 			searchBar.setUI(new SearchBarUI());
 			searchBar.setOpaque(true);
 			searchBar.setPreferredSize(new Dimension(210,25));
+			search.add(Box.createRigidArea(new Dimension(5,0)));
+			search.add(Box.createRigidArea(new Dimension(5,0)));
 			search.add(searchBar);
 			
+			ImageIcon iFilter = new ImageIcon("filter.png");
+			JLabel filterImg = new JLabel();
+			filterImg.setIcon(iFilter);
+			filterImg.setBorder(new EmptyBorder(0,0,0,0));
 			
+			search.add(filterImg);
+			searchBar.setPreferredSize(new Dimension(210,iFilter.getIconHeight()));
 			int y = (int) (gamesLabel.getPreferredSize().getHeight() + searchBar.getPreferredSize().getHeight()+20);
 			search.setPreferredSize(new Dimension(257, y));
+			
+			
+			sortLabel.setBorder(new EmptyBorder(0,5,0,0));
+			readyLabel.setBorder(new EmptyBorder(0,5,0,0));
+			
+		
 		}
 	}
 	

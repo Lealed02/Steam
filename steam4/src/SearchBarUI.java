@@ -17,21 +17,24 @@ public class SearchBarUI extends BasicLabelUI {
 		ImageIcon iMag = new ImageIcon("mag.png");
 		JLabel magImg = new JLabel();
 		magImg.setIcon(iMag);
-		magImg.setBorder(new EmptyBorder(0,3,0,0));
+		magImg.setBorder(new EmptyBorder(2,3,0,0));
 		c.add(magImg);
 		f2.setHgap(0);
 		
 		JTextField searchBar = new JTextField();
 		searchBar.setForeground(Color.white);
 		searchBar.setText("<html><h1 color='white'>Hi</h1></html>");
-		searchBar.setPreferredSize(new Dimension(190, 15));
-		searchBar.setBorder(new EmptyBorder(0,5,2,0));
+		searchBar.setPreferredSize(new Dimension(185, 25));
+		searchBar.setBorder(new EmptyBorder(3,5,3,0));
 		searchBar.setCaretColor(Color.WHITE);
-	
+		searchBar.setFont(new Font("FF Din OT Bold", Font.PLAIN, 14));
+		searchBar.setBackground(Color.red);
 		searchBar.setBackground(null);
 		
-		
 		c.add(searchBar);
+		
+		
+		
 
 
         
@@ -48,7 +51,8 @@ public class SearchBarUI extends BasicLabelUI {
 	  private void paintBackground (Graphics g, JComponent c, int yOffset) {
 		  Graphics2D g2 = (Graphics2D) g;
 		  
-		 c.setBackground(new Color(46,38,44));
+		 c.setBackground(new Color(36,39,44));
+		
 		  
 	  }
 	  
