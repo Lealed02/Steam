@@ -357,7 +357,7 @@ public class Steam {
 					}
 				} else {
 				//	read.append((char) c);
-					
+					read.t
 					
 				}
 				
