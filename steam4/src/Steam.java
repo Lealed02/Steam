@@ -332,21 +332,23 @@ public class Steam {
 		
 		for (int y = 1
 				; y < 60; y++) {
-			button = new JButton("Button 2");
+			//Add center panel
 			c.fill = GridBagConstraints.HORIZONTAL;
 			button.setPreferredSize(gameSize);
 			c.weightx = 1;
 			c.gridx = 2;
 			c.gridy = y;
-			test.add(button, c);
+			//test.add(button, c);
 			
+			
+			//add left grid
 			 button = new JButton("Button 3");
 			c.fill = GridBagConstraints.HORIZONTAL;
 			button.setPreferredSize(friendSize);
 			c.weightx = 0;
 			c.gridx = 1;
 			c.gridy = y;
-			test.add(button, c);
+			//test.add(button, c);
 		}
 		}
 	
