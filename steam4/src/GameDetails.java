@@ -15,7 +15,8 @@ public class GameDetails {
 		return icon;
 	}
 	public void setIcon(String icon) {
-		this.icon = new ImageIcon(icon);
+		this.icon = new ImageIcon("game.png");
+		//this.icon = new ImageIcon(icon);
 	}
 	
 	public String getName() {

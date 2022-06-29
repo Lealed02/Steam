@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 
 
@@ -34,7 +35,7 @@ public class Steam {
 	private FCenter center = new FCenter();
 	
 	//Side panel
-	
+	private JScrollPane side;
 		private JLabel homeLabel = new JLabel();
 		private JLabel gamesLabel = new JLabel();
 		 //Will turn sideBar into a scroll pane once initialised
@@ -45,7 +46,7 @@ public class Steam {
 		
 		
 	private SideBar sideBar = new SideBar();	
-	private JScrollPane side;
+
 	private GlassPane glass = new GlassPane();
 	
 	private final MainFrame mainFrame = new MainFrame();
@@ -78,6 +79,7 @@ public class Steam {
             	
             	frame.pack();
             	frame.setVisible(true);
+            	 
             	
             	System.out.println(sideBar.getWidth());
             }
@@ -110,6 +112,7 @@ public class Steam {
 			
 			this.add(bMenu, BorderLayout.NORTH);
 			this.add(center, BorderLayout.CENTER);
+			
 			this.add(sideBar, BorderLayout.WEST);
 			
 			
@@ -191,14 +194,20 @@ public class Steam {
 			setupScroll();
 			
 			this.add(side, BorderLayout.CENTER);
+			side.setVisible(true);
+			
+			//this.add(bot, BorderLayout.CENTER);
 			
 		//	this.setPSize(new Dimension(300,300));
 		}
 		
 		public void setupScroll() {
 			side = new JScrollPane(bot);
+			side.setOpaque(true);
+			side.getVerticalScrollBar().setUI(new CustomScrollBarUI());
 			
 		}
+		
 		
 	
 		
@@ -280,7 +289,7 @@ public class Steam {
 			
 			search.add(filterImg);
 			searchBar.setPreferredSize(new Dimension(210,iFilter.getIconHeight()));
-			int y = (int) (gamesLabel.getPreferredSize().getHeight() + searchBar.getPreferredSize().getHeight()+20);
+			int y = (int) (gamesLabel.getPreferredSize().getHeight() + searchBar.getPreferredSize().getHeight()+19);
 			search.setPreferredSize(new Dimension(257, y));
 			
 			
@@ -289,14 +298,58 @@ public class Steam {
 			
 		
 		}
+		
+	
+		
 	}
 	
 	public class SBot extends JPanel {
+		private JPanel test = new JPanel();
+		private Dimension friendSize = new Dimension(25,20);
+		private Dimension gameSize = new Dimension(20,20);
 		public SBot() {
 			this.setBackground(Modes.Cbot.toColor());
-
-			
+			JPanel main = new JPanel();
+			setupGameList();
+			this.setLayout(new BorderLayout());
+			this.add(test, BorderLayout.NORTH);
 		}
+		
+	public void setupGameList() {
+		test.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		JButton button = new JButton("poob");
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		button.setPreferredSize(gameSize);
+		c.weightx = 1;
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridwidth= 2;
+	
+		test.add(button, c);
+		c.gridwidth = 1;
+		
+		for (int y = 1
+				; y < 60; y++) {
+			button = new JButton("Button 2");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			button.setPreferredSize(gameSize);
+			c.weightx = 1;
+			c.gridx = 2;
+			c.gridy = y;
+			test.add(button, c);
+			
+			 button = new JButton("Button 3");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			button.setPreferredSize(friendSize);
+			c.weightx = 0;
+			c.gridx = 1;
+			c.gridy = y;
+			test.add(button, c);
+		}
+		}
+	
 		
 		
 	}
@@ -311,72 +364,49 @@ public class Steam {
 	
 	public class ReadDetails {
 		public ArrayList<GameDetails> read() throws IOException {
-		
-			BufferedReader bRead = new BufferedReader(new FileReader("GamesList.txt"));
-			int i;
-		
-			GameDetails current = new GameDetails();
-			int c;
-			StringBuilder read= new StringBuilder();
-			ArrayList<GameDetails> list = new ArrayList<GameDetails>();
-			int type = 0;
-	
-			while ((c = bRead.read()) != -1) {
-			
-				
-			//	System.out.println((char) c);
-			//	read.append((char) c);
-				char d = (char) c;
-			//	System.out.println(read.toString());
-				
-			
-				char a = ",".toCharArray()[0];
-				
-				
-				if (d == a) {
-			       switch (type) {
-					case 0:
-						type = 1;
-						
-						if (read.toString().equals("true")) {
-							current.setFriend(true);
-							
-						} else {
-							current.setFriend(false);
-						}
-						read = new StringBuilder();
+		ArrayList<GameDetails> list = new ArrayList<GameDetails>();
+		GameDetails current = new GameDetails();
+		FileReader fileReader = new FileReader("GamesList.txt");
+
+		char[] destination = new char[1024];
+
+		int charsRead = fileReader.read(destination, 0, destination.length);
+		StringBuilder a = new StringBuilder();
+		int count = 0;
+		for (int i = 0; i < destination.length; i++) {
+			//System.out.print(destination[i]);
+			if (destination[i] == ",".toCharArray()[0]) {
+				//System.out.println(a.toString());
+				if (count == 0) {
 					
+					if (a.toString() == "true") {
+						current.setFriend(true);
 						
-					case 1:
-						//current.setIcon(read.toString());
-						type = 2;
-						read = new StringBuilder();
-					
-					case 2:
-						current.setName(read.toString());
-						//current.setName(b);
-						read = new StringBuilder();
-						type=0;
-						list.add(current);
-						current = new GameDetails();
-						
+					} else {
+						current.setFriend(false);
 					}
+					count++;
+					
+				} else if (count == 1) {
+					current.setIcon(a.toString());
+					count++;
 				} else {
-					read.append((char) c);
-					
-					
+					current.setName(a.toString());
+					list.add(current);
+					count = 0;
+					current = new GameDetails();
 				}
+				a = new StringBuilder();
 				
+			} else {
+				a.append(destination[i]);
 			}
-			readAll(list);
-			return list;
-		
-			
+		}
+	//	System.out.println(list.get(0).getName());
+		return list;
 		}
 		
-		public void readAll(ArrayList<GameDetails> list) {
-			System.out.println(list.get(0).getName());
-		}
+	
 	}
 	
 	
