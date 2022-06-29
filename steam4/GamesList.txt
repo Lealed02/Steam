@@ -1,1 +1,1 @@
-false,cod2.png,Call of Duty 2,true,fuck,shit,
+true,logo.jpg,Left 4 Dead 2,false,cod2.jpg,Call of Duty 2,false,cod4.jpg,Call of Duty 4,false,jc2.jpg,Just Cause 2

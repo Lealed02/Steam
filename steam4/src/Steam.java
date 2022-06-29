@@ -305,8 +305,8 @@ public class Steam {
 	
 	public class SBot extends JPanel {
 		private JPanel test = new JPanel();
-		private Dimension friendSize = new Dimension(25,20);
-		private Dimension gameSize = new Dimension(20,20);
+		private Dimension friendSize = new Dimension(10,24);
+		private Dimension gameSize = new Dimension(20,24);
 		public SBot() {
 			this.setBackground(Modes.Cbot.toColor());
 			JPanel main = new JPanel();
@@ -326,6 +326,7 @@ public class Steam {
 		c.gridx = 1;
 		c.gridy = 0;
 		c.gridwidth= 2;
+		
 	
 		test.add(button, c);
 		c.gridwidth = 1;
@@ -333,26 +334,78 @@ public class Steam {
 		for (int y = 1
 				; y < 60; y++) {
 			//Add center panel
+			
+			Boolean f = false;
+			
+			if (y % 2 != 0) {
+				f = true;
+			}
 			c.fill = GridBagConstraints.HORIZONTAL;
 			button.setPreferredSize(gameSize);
 			c.weightx = 1;
 			c.gridx = 2;
 			c.gridy = y;
-			//test.add(button, c);
+			test.add(new GPanel(f), c);
 			
 			
 			//add left grid
 			 button = new JButton("Button 3");
 			c.fill = GridBagConstraints.HORIZONTAL;
-			button.setPreferredSize(friendSize);
+			//button.setPreferredSize(friendSize);
+			
 			c.weightx = 0;
 			c.gridx = 1;
 			c.gridy = y;
-			//test.add(button, c);
+			f = false;
+			if (y%2 != 0) {
+				f = true;
+			}
+			test.add(new FLabel(f), c);
+			
 		}
 		}
-	
 		
+	private class FLabel extends JPanel {
+		public FLabel(Boolean f) {
+			this.setPreferredSize(friendSize);
+			this.setLayout(new FlowLayout(FlowLayout.CENTER));
+			JLabel inner = new JLabel(); 	
+			
+			
+			inner.setIcon(new ImageIcon("friend.png"));
+			
+			if (f) {
+				this.add(inner);
+			}
+			
+			
+		
+			this.setBackground(Modes.Cbot.toColor());
+			this.setOpaque(true);
+			
+			
+		}
+	}
+	
+	private class GPanel extends JPanel {
+		ImageIcon img = new ImageIcon(new ImageIcon("gameIcons/logo.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+		JLabel logo = new JLabel(new ImageIcon("logo.jpg"), JLabel.CENTER);
+		String name = "<html><p color='white'>Left 4 Dead 2</p></html>";
+		GameDetails game = new GameDetails();
+		
+		public GPanel(Boolean f) {
+			logo.setIcon(img);
+			this.setPreferredSize(gameSize);
+			FlowLayout f1 = new FlowLayout(FlowLayout.LEFT);
+			f1.setHgap(0); f1.setVgap(0);
+			this.setLayout(f1);
+			logo.setBorder(new EmptyBorder(2,2,2,4));
+			this.add(logo);
+			this.add(new JLabel(name));
+			
+			this.setBackground(Modes.Cbot.toColor());
+		}
+	}
 		
 	}
 	
