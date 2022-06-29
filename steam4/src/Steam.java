@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -74,6 +77,7 @@ public class Steam {
             	setBorders();
             	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             	frame.setMinimumSize(frameSize);
+            	frame.setPreferredSize(frameSize);
             	frame.add(mainFrame);
             	frame.setJMenuBar(tmenu);
             	
@@ -81,7 +85,7 @@ public class Steam {
             	frame.setVisible(true);
             	 
             	
-            	System.out.println(sideBar.getWidth());
+            	
             }
         });
 	}
@@ -183,8 +187,9 @@ public class Steam {
 		}
 	}
 	
-	public class SideBar extends JPanel {
+	public class SideBar extends JPanel implements MouseListener {
 		public SideBar() {
+			this.addMouseListener(this);
 			this.setLayout(new BorderLayout());
 			this.setBackground(Color.red);
 			this.setMinimumSize(new Dimension(300,300));
@@ -203,9 +208,43 @@ public class Steam {
 		
 		public void setupScroll() {
 			side = new JScrollPane(bot);
-			side.setOpaque(true);
+		//	side.setOpaque(true);
+			side.getVerticalScrollBar().setPreferredSize(new Dimension(8,100));
 			side.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+			side.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			side.getVerticalScrollBar().setEnabled(false);
+			side.getVerticalScrollBar().addMouseListener(this);
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
 			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			side.getVerticalScrollBar().setEnabled(true);
+	
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			side.getVerticalScrollBar().setEnabled(false);
 		}
 		
 		
@@ -214,7 +253,7 @@ public class Steam {
 	
 	}
 	
-	public class STop extends JPanel {
+	public class STop extends JPanel  {
 		public STop() {
 			this.setLayout(new BorderLayout());
 			this.setBackground(Modes.Clmenu.toColor());
@@ -298,14 +337,16 @@ public class Steam {
 			
 		
 		}
+
+		
 		
 	
 		
 	}
 	
-	public class SBot extends JPanel {
+	public class SBot extends JPanel implements MouseListener {
 		private JPanel test = new JPanel();
-		private Dimension friendSize = new Dimension(10,24);
+		private Dimension friendSize = new Dimension(20,24);
 		private Dimension gameSize = new Dimension(20,24);
 		public SBot() {
 			this.setBackground(Modes.Cbot.toColor());
@@ -313,7 +354,9 @@ public class Steam {
 			setupGameList();
 			this.setLayout(new BorderLayout());
 			this.add(test, BorderLayout.NORTH);
+			
 		}
+		
 		
 	public void setupGameList() {
 		test.setLayout(new GridBagLayout());
@@ -328,12 +371,12 @@ public class Steam {
 		c.gridwidth= 2;
 		
 	
-		test.add(button, c);
+		//test.add(button, c);
 		c.gridwidth = 1;
 		
 		for (int y = 1
 				; y < 60; y++) {
-			//Add center panel
+			//Add centre panel
 			
 			Boolean f = false;
 			
@@ -368,14 +411,14 @@ public class Steam {
 	private class FLabel extends JPanel {
 		public FLabel(Boolean f) {
 			this.setPreferredSize(friendSize);
-			this.setLayout(new FlowLayout(FlowLayout.CENTER));
+			this.setLayout(new BorderLayout());
 			JLabel inner = new JLabel(); 	
-			
+			inner.setBorder(new EmptyBorder(6,10,6,0));
 			
 			inner.setIcon(new ImageIcon("friend.png"));
 			
 			if (f) {
-				this.add(inner);
+				this.add(inner, BorderLayout.CENTER);
 			}
 			
 			
@@ -387,7 +430,7 @@ public class Steam {
 		}
 	}
 	
-	private class GPanel extends JPanel {
+	private class GPanel extends JPanel implements MouseListener{
 		ImageIcon img = new ImageIcon(new ImageIcon("gameIcons/logo.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		JLabel logo = new JLabel(new ImageIcon("logo.jpg"), JLabel.CENTER);
 		String name = "<html><p color='white'>Left 4 Dead 2</p></html>";
@@ -402,9 +445,75 @@ public class Steam {
 			logo.setBorder(new EmptyBorder(2,2,2,4));
 			this.add(logo);
 			this.add(new JLabel(name));
+			this.addMouseListener(this);
 			
 			this.setBackground(Modes.Cbot.toColor());
 		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			this.setBackground(Modes.Chover.toColor());
+			side.getVerticalScrollBar().setEnabled(true);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			this.setBackground(Modes.Cbot.toColor());
+		side.getVerticalScrollBar().setEnabled(false);
+			
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		side.getVerticalScrollBar().setEnabled(true);
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		side.getVerticalScrollBar().setEnabled(false);
 	}
 		
 	}
@@ -475,15 +584,21 @@ public class Steam {
 	    Ctop (new Color(1,1,1)),
 	    Cbot (new Color(42,47,55)),
 		Ccenter (new Color(56,60,75,255)),
-		Cgameslabel (new Color(46,38,44));
+		Cgameslabel (new Color(46,38,44)),
+		Chover ("#323a4b");
 		
-	    private final Color name;       
+	    private final Color name;    
+	    
 
 	    private Modes(Color color) {
 	        name = color;
 	    }
 
-	    public boolean equalsName(String otherName) {
+	    Modes(String string) {
+			name = Color.decode(string);
+		}
+
+		public boolean equalsName(String otherName) {
 	        // (otherName == null) check is not needed because name.equals(null) returns false 
 	        return name.equals(otherName);
 	    }
