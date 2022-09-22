@@ -28,10 +28,10 @@ public class Steam {
 	private ImageIcon iCollections = new ImageIcon("collections.png");
 	
 	//test
-	
+	private ArrayList<GameDetails> Lgames = new ArrayList<GameDetails>();
 	private TopMenu tmenu = new TopMenu();
 	private BotMenu bMenu = new BotMenu();
-	private ArrayList<GameDetails> Lgames = new ArrayList<GameDetails>();
+
 	
 	
 	//Center panel
@@ -80,6 +80,8 @@ public class Steam {
             	frame.setPreferredSize(frameSize);
             	frame.add(mainFrame);
             	frame.setJMenuBar(tmenu);
+            	
+            	bot.setupGameList();
             	
             	frame.pack();
             	frame.setVisible(true);
@@ -230,8 +232,7 @@ public class Steam {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+		
 		}
 
 		@Override
@@ -361,10 +362,10 @@ public class Steam {
 	public void setupGameList() {
 		test.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		JButton button = new JButton("poob");
+		
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
-		button.setPreferredSize(gameSize);
+	
 		c.weightx = 1;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -374,8 +375,8 @@ public class Steam {
 		//test.add(button, c);
 		c.gridwidth = 1;
 		
-		for (int y = 1
-				; y < 60; y++) {
+		for (int y = 0
+				; y < Lgames.size(); y++) {
 			//Add centre panel
 			
 			Boolean f = false;
@@ -384,21 +385,21 @@ public class Steam {
 				f = true;
 			}
 			c.fill = GridBagConstraints.HORIZONTAL;
-			button.setPreferredSize(gameSize);
+			//button.setPreferredSize(gameSize);
 			c.weightx = 1;
 			c.gridx = 2;
-			c.gridy = y;
-			test.add(new GPanel(f), c);
+			c.gridy = y+1;
+			test.add(new GPanel(Lgames.get(y)), c);
 			
 			
 			//add left grid
-			 button = new JButton("Button 3");
+			// button = new JButton("Button 3");
 			c.fill = GridBagConstraints.HORIZONTAL;
 			//button.setPreferredSize(friendSize);
 			
 			c.weightx = 0;
 			c.gridx = 1;
-			c.gridy = y;
+			c.gridy = y+1;
 			f = false;
 			if (y%2 != 0) {
 				f = true;
@@ -431,12 +432,16 @@ public class Steam {
 	}
 	
 	private class GPanel extends JPanel implements MouseListener{
+		
 		ImageIcon img = new ImageIcon(new ImageIcon("gameIcons/logo.jpg").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		JLabel logo = new JLabel(new ImageIcon("logo.jpg"), JLabel.CENTER);
 		String name = "<html><p color='white'>Left 4 Dead 2</p></html>";
 		GameDetails game = new GameDetails();
 		
-		public GPanel(Boolean f) {
+		public GPanel(GameDetails f) {
+			name = "<html><p color='white'>" + f.getName() + "</p></html>";
+			String path = "gameIcons/" +  f.getIcon();
+			img = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 			logo.setIcon(img);
 			this.setPreferredSize(gameSize);
 			FlowLayout f1 = new FlowLayout(FlowLayout.LEFT);
@@ -499,7 +504,7 @@ public class Steam {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+	
 	}
 
 
@@ -567,6 +572,7 @@ public class Steam {
 			}
 		}
 	//	System.out.println(list.get(0).getName());
+		fileReader.close();
 		return list;
 		}
 		
@@ -609,5 +615,5 @@ public class Steam {
 	}
 	
 	//Dimensions
-	private Dimension frameSize = new Dimension(500,500);
+	private Dimension frameSize = new Dimension(1000,600);
 }
